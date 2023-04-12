@@ -8,13 +8,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import "./App.css";
 import {Typography} from "@mui/material";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import axios from "axios";
-import {TCoin} from "./types/types";
+import CryptoTable from "./components/cryptoTable/cryptoTable";
 
 
 
@@ -45,26 +39,8 @@ const currencies = [
     },
 ];
 
-
 function App () {
 
-    const [allCoins, setAllCoins] = useState<TCoin[]>([])
-
-    useEffect(() => {
-        axios.get('https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD').then(({data}) => {
-            console.log(data)
-            const coins: TCoin[] = data?.Data?.map((coin:any) =>
-                ({
-                    name: coin.CoinInfo.Name,
-                    fullName: coin.CoinInfo.FullName,
-                    imageUrl: `https://cryptocompare.com/${coin.CoinInfo.ImageUrl}`,
-                    price: parseInt(coin.RAW.USD.PRICE),
-                    volume24Hour: parseInt(coin.RAW.USD.VALUME24HOUR),
-                })
-            )
-            setAllCoins(coins);
-        })
-    }, [])
 
   return (
       <Box sx={{ flexGrow: 2 }}>
@@ -72,33 +48,7 @@ function App () {
               <Grid container spacing={2}>
                   <Grid item xs={8}>
                       <Item>
-                              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                  <TableHead>
-                                      <TableRow>
-                                          <TableCell></TableCell>
-                                          <TableCell align="right">FullName</TableCell>
-                                          <TableCell align="right">Name</TableCell>
-                                          <TableCell align="right">Price</TableCell>
-                                          <TableCell align="right">Volume24hour</TableCell>
-                                      </TableRow>
-                                  </TableHead>
-                                  <TableBody>
-                                      {allCoins?.map((coin) => (
-                                          <TableRow
-                                              key={coin.name}
-                                              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                          >
-                                              <TableCell component="th" scope="row">
-                                                  <img className='coins' src={coin.imageUrl} alt='logo'/>
-                                              </TableCell>
-                                              <TableCell align="right">{coin.name}</TableCell>
-                                              <TableCell align="right">{coin.fullName}</TableCell>
-                                              <TableCell align="right">{coin.price}</TableCell>
-                                              <TableCell align="right">{coin.volume24Hour}</TableCell>
-                                          </TableRow>
-                                      ))}
-                                  </TableBody>
-                              </Table>
+                        <CryptoTable/>
                       </Item>
                   </Grid>
                   <Grid item xs={4}>
