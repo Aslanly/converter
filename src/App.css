@@ -12,3 +12,8 @@
 .text {
     margin-top: 10px;
 }
+
+.coins {
+    width: 18px;
+    height: 18px;
+}
