@@ -1,0 +1,14 @@
+.wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container {
+    display: inline-flex;
+    gap: 10px;
+}
+
+.text {
+    margin-top: 10px;
+}
