@@ -1,7 +1,13 @@
 export interface TCoin {
-    name: string,
-    fullName: string,
-    imageUrl: string,
-    price: number,
-    volume24Hour: number,
+    CoinInfo: {
+        Name: string,
+        FullName: string,
+        ImageUrl: string,
+    },
+    RAW: {
+        USD: {
+            PRICE:number,
+            VOLUME24HOUR:number,
+        },
+    },
 }
