@@ -1,28 +1,18 @@
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import {Typography} from "@mui/material";
-import React from "react";
+import React, {useEffect} from "react";
+import CoinStore from '../store/store';
 
-
-const currencies = [
-    {
-        value: 'USD',
-        label: '$',
-    },
-    {
-        value: 'EUR',
-        label: '€',
-    },
-    {
-        value: 'BTC',
-        label: '฿',
-    },
-    {
-        value: 'JPY',
-        label: '¥',
-    },
-];
 const ConverterBlock = () => {
+
+    const {coins} = CoinStore;
+
+    useEffect(() => {
+
+    })
+
+
     return (
         <div className="wrapper">
             <div className="container">
@@ -40,9 +30,9 @@ const ConverterBlock = () => {
                         select
                         defaultValue="EUR"
                     >
-                        {currencies.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
+                        {coins.map((coin) => (
+                            <MenuItem key={coin.CoinInfo.Name} value={coin.CoinInfo.Name}>
+                                {coin.CoinInfo.Name}
                             </MenuItem>
                         ))}
                     </TextField>
@@ -63,9 +53,9 @@ const ConverterBlock = () => {
                         select
                         defaultValue="EUR"
                     >
-                        {currencies.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
+                        {coins.map((coin) => (
+                            <MenuItem key={coin.CoinInfo.Name} value={coin.CoinInfo.Name}>
+                                {coin.CoinInfo.Name}
                             </MenuItem>
                         ))}
                     </TextField>

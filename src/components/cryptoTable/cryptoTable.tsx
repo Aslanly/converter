@@ -8,7 +8,6 @@ import {observer} from "mobx-react-lite";
 import CoinStore from '../store/store';
 
 
-
 const CryptoTable = () => {
 
     const {coins, setCoin} = CoinStore;

@@ -3,6 +3,7 @@ export interface TCoin {
         Name: string,
         FullName: string,
         ImageUrl: string,
+        id: string;
     },
     RAW: {
         USD: {
