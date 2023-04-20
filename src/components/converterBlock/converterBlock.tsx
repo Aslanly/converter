@@ -1,16 +1,35 @@
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import {Typography} from "@mui/material";
-import React, {useEffect} from "react";
-import CoinStore from '../store/store';
+import React, {ChangeEvent, useEffect} from "react";
+import CoinStore from '../../store/store';
+import {observer} from "mobx-react-lite";
 
 const ConverterBlock = () => {
 
-    const {coins} = CoinStore;
+    const {
+        coins,
+        setCoin,
+        secondCoinName,
+        convertCoinPair,
+        firstCoinValue,
+        pairValue,
+        firstCoinName,
+        setCoinPair,
+        secondCoinValue,
+        setCoinValue,
+    } = CoinStore;
+
+    const handleChangeCoinValue = (event:ChangeEvent<HTMLInputElement>) => {
+        const field = event.target.id
+        const value = +event.target.value
+        if(field !== 'first' && field !== 'second' || Number.isNaN(value)) return
+        setCoinValue(field, value)
+    }
 
     useEffect(() => {
-
-    })
+        setCoinPair()
+    }, [])
 
 
     return (
@@ -18,19 +37,19 @@ const ConverterBlock = () => {
             <div className="container">
                 <div className="input">
                     <TextField
-                        id="outlined-multiline-flexible"
-                        label="Валюта"
-                        multiline
-                        maxRows={4}
+                        id='first'
+                        onChange={handleChangeCoinValue}
+                        value={firstCoinValue}
+                        label={firstCoinName}
                     />
                 </div>
                 <div className="select">
                     <TextField
+                        value={firstCoinName}
                         id="outlined-select-currency"
                         select
-                        defaultValue="EUR"
                     >
-                        {coins.map((coin) => (
+                        {coins?.map((coin) => (
                             <MenuItem key={coin.CoinInfo.Name} value={coin.CoinInfo.Name}>
                                 {coin.CoinInfo.Name}
                             </MenuItem>
@@ -41,17 +60,17 @@ const ConverterBlock = () => {
             <div className="container">
                 <div className="input">
                     <TextField
-                        id="outlined-multiline-flexible"
-                        label="Валюта"
-                        multiline
-                        maxRows={4}
+                        id='second'
+                        onChange={handleChangeCoinValue}
+                        value={secondCoinValue}
+                        label={secondCoinName}
                     />
                 </div>
                 <div className="select">
                     <TextField
+                        value={secondCoinName}
                         id="outlined-select-currency"
                         select
-                        defaultValue="EUR"
                     >
                         {coins.map((coin) => (
                             <MenuItem key={coin.CoinInfo.Name} value={coin.CoinInfo.Name}>
@@ -70,4 +89,4 @@ const ConverterBlock = () => {
     )
 }
 
-export default ConverterBlock;
+export default observer(ConverterBlock);

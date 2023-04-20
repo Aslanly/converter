@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import Table from "@mui/material/Table";
 import {observer} from "mobx-react-lite";
-import CoinStore from '../store/store';
+import CoinStore from '../../store/store';
 
 
 const CryptoTable = () => {

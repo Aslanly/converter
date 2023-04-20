@@ -7,7 +7,6 @@ import CryptoTable from "./components/cryptoTable/cryptoTable";
 import ConverterBlock from "./components/converterBlock/converterBlock";
 import Item from "./components/styles/styles";
 
-
 function App () {
   return (
       <Box sx={{ flexGrow: 2 }}>
