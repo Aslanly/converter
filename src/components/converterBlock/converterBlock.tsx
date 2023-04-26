@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import {Typography} from "@mui/material";
-import React, {ChangeEvent, useEffect} from "react";
+import React, {BaseSyntheticEvent, ChangeEvent, useEffect, useState} from "react";
 import CoinStore from '../../store/store';
 import {observer} from "mobx-react-lite";
 
@@ -9,12 +9,10 @@ const ConverterBlock = () => {
 
     const {
         coins,
-        setCoin,
         secondCoinName,
-        convertCoinPair,
         firstCoinValue,
-        pairValue,
         firstCoinName,
+        setCoinPairName,
         setCoinPair,
         secondCoinValue,
         setCoinValue,
@@ -27,13 +25,25 @@ const ConverterBlock = () => {
         setCoinValue(field, value)
     }
 
+    const hendleChangeCoinName = (event:BaseSyntheticEvent, field:string) => {
+        const value = event.target.value
+        setCoinPairName(field, value)
+        setCoinPair()
+
+    }
+
+
     useEffect(() => {
         setCoinPair()
     }, [])
 
+    const [click, setClick] = useState()
+
+
 
     return (
         <div className="wrapper">
+            <input type="range"/>
             <div className="container">
                 <div className="input">
                     <TextField
@@ -46,8 +56,8 @@ const ConverterBlock = () => {
                 <div className="select">
                     <TextField
                         value={firstCoinName}
-                        id="outlined-select-currency"
                         select
+                        onChange={(e) => hendleChangeCoinName(e, 'first')}
                     >
                         {coins?.map((coin) => (
                             <MenuItem key={coin.CoinInfo.Name} value={coin.CoinInfo.Name}>
@@ -69,8 +79,10 @@ const ConverterBlock = () => {
                 <div className="select">
                     <TextField
                         value={secondCoinName}
-                        id="outlined-select-currency"
+                        id='second'
                         select
+                        onChange={(e) => hendleChangeCoinName(e, 'second')}
+
                     >
                         {coins.map((coin) => (
                             <MenuItem key={coin.CoinInfo.Name} value={coin.CoinInfo.Name}>

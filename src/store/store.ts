@@ -40,8 +40,8 @@ class CoinStore {
         }
     }
 
-    setCoinValue = (field:string, value:number) => {
-        if (field === 'first'){
+    setCoinValue = (input :string, value:number) => {
+        if (input === 'first'){
             this.firstCoinValue = value;
             this.convertCoinPair("first")
         } else {
@@ -56,6 +56,14 @@ class CoinStore {
             this.secondCoinValue = this.firstCoinValue * this.pairValue;
         } else if (field === 'second' && this.secondCoinValue){
             this.firstCoinValue = this.secondCoinValue / this.pairValue;
+        }
+    }
+
+    setCoinPairName = (input:string, value:string) => {
+        if(input === 'first'){
+            this.firstCoinName = value;
+        } else {
+            this.secondCoinName = value;
         }
     }
 
